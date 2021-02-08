@@ -1,21 +1,25 @@
 import { Container } from 'react-bootstrap'
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
 import Header from './components/Header'
 import Footer from './components/Footer'
 
 import Home from './pages/Home'
+import ProductDetails from './pages/ProductDetails';
 
 function App() {
   return (
-    <div>
+    <Router>
       <Header />
       <main className="py-6">
         <Container>
-          <Home />
+          {/* -----Using exact because of '/'----- */}
+          <Route path='/'component={Home} exact />
+          <Route path='/product/:id'component={ProductDetails}  />
         </Container>
       </main>
       <Footer />
-    </div>
+    </Router>
   );
 }
 
