@@ -6,6 +6,8 @@ import Footer from './components/Footer'
 
 import Home from './pages/Home'
 import ProductDetails from './pages/ProductDetails';
+import Cart from './pages/Cart';
+
 
 function App() {
   return (
@@ -16,6 +18,7 @@ function App() {
           {/* -----Using exact because of '/'----- */}
           <Route path='/'component={Home} exact />
           <Route path='/product/:id'component={ProductDetails}  />
+          <Route path='/cart/:id?'component={Cart}  />
         </Container>
       </main>
       <Footer />
