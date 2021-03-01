@@ -1,10 +1,4 @@
-from django.shortcuts import render
-from django.http import JsonResponse
-from rest_framework import permissions, serializers
-
-from .models import Product
-from .products import products
-from .serializers import ProductSerializer, UserSerializer, UserSerializerWithToken
+from base.serializers import UserSerializer, UserSerializerWithToken
 
 from django.contrib.auth.models import User
 
@@ -59,15 +53,6 @@ def registerUser(request):
 
 
 @api_view(['GET'])
-def getRoutes(request):
-    routes = [
-        'api/products',
-        'api/products/<id>',
-    ]
-    return Response(routes)
-
-
-@api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def getUserProfile(request):
     user = request.user
@@ -81,20 +66,4 @@ def getUsers(request):
     users = User.objects.all()
     # many for serializing many objects
     serializer = UserSerializer(users, many=True)
-    return Response(serializer.data)
-
-@api_view(['GET'])
-def getProducts(request):
-    products = Product.objects.all()
-    # many for serializing many objects
-    serializer = ProductSerializer(products, many=True)
-    return Response(serializer.data)
-
-
-@api_view(['GET'])
-def getProduct(request, pk):
-
-    product = Product.objects.get(_id=pk)
-    serializer = ProductSerializer(product, many=False)
-
     return Response(serializer.data)
