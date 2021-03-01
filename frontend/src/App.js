@@ -7,6 +7,7 @@ import Footer from './components/Footer'
 import Home from './pages/Home'
 import ProductDetails from './pages/ProductDetails';
 import Cart from './pages/Cart';
+import Login from './pages/Login';
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
         <Container>
           {/* -----Using exact because of '/'----- */}
           <Route path='/'component={Home} exact />
+          <Route path='/login'component={Login}  />
           <Route path='/product/:id'component={ProductDetails}  />
           <Route path='/cart/:id?'component={Cart}  />
         </Container>

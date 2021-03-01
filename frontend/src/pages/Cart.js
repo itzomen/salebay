@@ -32,7 +32,7 @@ function Cart({ match, location, history}) {
         dispatch(removeFromCart(id))
     }
 
-    const checkoutHandler = (id) => {
+    const checkoutHandler = () => {
         history.push('/login?redirect=shipping')
     }
 
