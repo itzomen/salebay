@@ -3,6 +3,8 @@ import {
     CART_ADD_ITEM,
     CART_REMOVE_ITEM,
 
+    CART_SAVE_SHIPPING_ADDRESS,
+
 } from '../constants/cartConstants'
 
 // add to cart uses id and qty as a id is undefined and qty=1 when 
@@ -35,4 +37,14 @@ export const removeFromCart = (id) => (dispatch, getState) => {
     })
 
     localStorage.setItem('cartItems', JSON.stringify(getState().cart.cartItems))
+}
+
+
+export const saveShippingAddress = (data) => (dispatch) => {
+    dispatch({
+        type: CART_SAVE_SHIPPING_ADDRESS,
+        payload: data,
+    })
+
+    localStorage.setItem('shippingAddress', JSON.stringify(data))
 }
