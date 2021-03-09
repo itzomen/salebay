@@ -4,9 +4,17 @@ import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import CheckoutSteps from '../components/CheckoutSteps'
+import { createOrder } from '../actions/orderActions'
+
+import { ORDER_CREATE_RESET } from '../constants/orderConstants'
 
 
 function PlaceOrder({ history }) {
+
+    const orderCreate = useSelector(state => state.orderCreate)
+    const { order, error, success } = orderCreate
+
+    const dispatch = useDispatch()
 
     const cart = useSelector(state => state.cart)
 
@@ -17,20 +25,27 @@ function PlaceOrder({ history }) {
     cart.totalPrice = (Number(cart.itemsPrice) + Number(cart.shippingPrice) + Number(cart.taxPrice)).toFixed(2)
 
 
-    // if (!cart.paymentMethod) {
-    //     history.push('/payment')
-    // }
+    if (!cart.paymentMethod) {
+        history.push('/payment')
+    }
 
-    // useEffect(() => {
-    //     if (success) {
-    //         history.push(`/order/${order._id}`)
-    //         dispatch({ type: ORDER_CREATE_RESET })
-    //     }
-    // }, [success, history])
+    useEffect(() => {
+        if (success) {
+            history.push(`/order/${order._id}`)
+            dispatch({ type: ORDER_CREATE_RESET })
+        }
+    }, [success, history])
 
     const placeOrder = () => {
-       
-        console.log('Order created')
+        dispatch(createOrder({
+            orderItems: cart.cartItems,
+            shippingAddress: cart.shippingAddress,
+            paymentMethod: cart.paymentMethod,
+            itemsPrice: cart.itemsPrice,
+            shippingPrice: cart.shippingPrice,
+            taxPrice: cart.taxPrice,
+            totalPrice: cart.totalPrice,
+        }))
     }
 
     
@@ -129,7 +144,7 @@ function PlaceOrder({ history }) {
 
 
                             <ListGroup.Item>
-                                Error
+                                {error && <Message variant='danger'>{error}</Message>}
                             </ListGroup.Item>
 
                             <ListGroup.Item>

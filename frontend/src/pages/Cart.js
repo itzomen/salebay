@@ -33,13 +33,14 @@ function Cart({ match, location, history}) {
     }
 
     const checkoutHandler = () => {
-        history.push('/login?redirect=shipping')
+        history.push('/shipping')
     }
 
     return (
         <Row>
             <Col md={8}>
                 <h1>Shopping Cart</h1>
+                <Link to='/' className='btn btn-dark my-3'>Go Back</Link>
                 {cartItems.length == 0 ? (
                     <Message variant='info'>
                         Your cart is empty <Link to='/'>Go Back</Link>
