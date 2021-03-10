@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { Button, Row, Col, ListGroup, Image, Card } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
+import { PayPalButton } from 'react-paypal-button-v2'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
-import { getOrderDetails } from '../actions/orderActions'
+import { getOrderDetails, payOrder } from '../actions/orderActions'
+import { ORDER_PAY_RESET } from '../constants/orderConstants'
 
 
 
@@ -12,15 +14,17 @@ function OrderDetails({ match, history }) {
     const orderId = match.params.id
     const dispatch = useDispatch()
 
+    const [sdkReady, setSdkReady] = useState(false)
 
     const orderDetails = useSelector(state => state.orderDetails)
-    const { order, error, loading } = orderDetails
+    const { order, error, loading, user } = orderDetails
 
-    // const orderPay = useSelector(state => state.orderPay)
-    // const { loading: loadingPay, success: successPay } = orderPay
+    const orderPay = useSelector(state => state.orderPay)
+    const { loading: loadingPay, success: successPay } = orderPay
 
     // const orderDeliver = useSelector(state => state.orderDeliver)
     // const { loading: loadingDeliver, success: successDeliver } = orderDeliver
+
 
     const userLogin = useSelector(state => state.userLogin)
     const { userInfo } = userLogin
@@ -30,6 +34,19 @@ function OrderDetails({ match, history }) {
         order.itemsPrice = order.orderItems.reduce((acc, item) => acc + item.price * item.qty, 0).toFixed(2)
     }
 
+    // Paypal Client ID: ARVUwKZ_Wh7sQ6qp81Wdy_JLifPkzBujw9sBepQFiCHjSAvGNUPqT9tG7YnhOICk1W8W8ReRZJSratua
+
+    const addPayPalScript = () => {
+        const script = document.createElement('script')
+        script.type = 'text/javascript'
+        script.src = 'https://www.paypal.com/sdk/js?client-id=ARVUwKZ_Wh7sQ6qp81Wdy_JLifPkzBujw9sBepQFiCHjSAvGNUPqT9tG7YnhOICk1W8W8ReRZJSratua'
+        script.async = true
+        script.onload = () => {
+            setSdkReady(true)
+        }
+        document.body.appendChild(script)
+    }
+
 
     useEffect(() => {
 
@@ -37,14 +54,25 @@ function OrderDetails({ match, history }) {
             history.push('/login')
         }
 
-        if (!order || order._id !== Number(orderId) ) {
+        if (!order || successPay || order._id !== Number(orderId)) {
+
+            dispatch({ type: ORDER_PAY_RESET })
 
             dispatch(getOrderDetails(orderId))
+        } else if (!order.isPaid) {
+            if (!window.paypal) {
+                addPayPalScript()
+            } else {
+                setSdkReady(true)
+            }
+        }
 
-        } 
-    }, [dispatch, order, orderId])
+    }, [dispatch, order, orderId, successPay])
 
 
+    const successPaymentHandler = (paymentResult) => {
+        dispatch(payOrder(orderId, paymentResult))
+    }
 
 
     return loading ? (
@@ -160,6 +188,21 @@ function OrderDetails({ match, history }) {
                                             <Col>${order.totalPrice}</Col>
                                         </Row>
                                     </ListGroup.Item>
+
+                                    {!order.isPaid && (
+                                        <ListGroup.Item>
+                                            {loadingPay && <Loader />}
+
+                                            {!sdkReady ? (
+                                                <Loader />
+                                            ) : (
+                                                    <PayPalButton
+                                                        amount={order.totalPrice}
+                                                        onSuccess={successPaymentHandler}
+                                                    />
+                                                )}
+                                        </ListGroup.Item>
+                                    )}
 
 
                             
