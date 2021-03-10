@@ -13,6 +13,7 @@ import Profile from './pages/Profile';
 import Shipping from './pages/Shipping';
 import Payment from './pages/Payment';
 import PlaceOrder from './pages/PlaceOrder'
+import OrderDetails from './pages/OrderDetails'
 
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
           <Route path='/profile'component={Profile}  />
           <Route path='/shipping'component={Shipping}  />
           <Route path='/placeorder'component={PlaceOrder}  />
+          <Route path='/order/:id'component={OrderDetails}  />
           <Route path='/payment'component={Payment}  />
           <Route path='/product/:id'component={ProductDetails}  />
           <Route path='/cart/:id?'component={Cart}  />

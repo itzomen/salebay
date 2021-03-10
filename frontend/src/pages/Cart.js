@@ -18,6 +18,9 @@ function Cart({ match, location, history}) {
 
     const dispatch = useDispatch()
 
+    const userLogin = useSelector(state => state.userLogin)
+    const { userInfo } = userLogin
+
     const cart = useSelector(state => state.cart)
     const { cartItems } = cart
     //console.log('cartitems:', cart)
@@ -33,7 +36,13 @@ function Cart({ match, location, history}) {
     }
 
     const checkoutHandler = () => {
-        history.push('/shipping')
+
+        if (!userInfo) {
+            history.push('/login')
+        }
+        else{
+            history.push('/shipping')
+        }
     }
 
     return (
@@ -97,7 +106,7 @@ function Cart({ match, location, history}) {
             </Col>
 
             <Col md={4}>
-            <Card>
+                <Card>
                     <ListGroup variant='flush'>
                         <ListGroup.Item>
                             <h3>Subtotal ({cartItems.reduce((acc, item) => acc + item.qty, 0)}) items</h3>
@@ -108,6 +117,7 @@ function Cart({ match, location, history}) {
                     <ListGroup.Item>
                         <Button
                             type='button'
+                            variant="outline-primary"
                             className='btn-block'
                             disabled={cartItems.length === 0}
                             onClick={checkoutHandler}

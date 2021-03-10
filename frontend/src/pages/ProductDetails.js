@@ -38,10 +38,10 @@ function ProductDetails({ match, history }) {
                                 <Image src={product.image} alt={product.name} fluid />
                             </Col>
             
-                            <Col md={3}>
+                            <Col md={6}>
                                 <ListGroup variant="flush">
                                     <ListGroup.Item>
-                                        <h3>{product.name}</h3>
+                                        <h4>{product.name}</h4>
                                     </ListGroup.Item>
             
                                     <ListGroup.Item>
@@ -49,36 +49,28 @@ function ProductDetails({ match, history }) {
                                     </ListGroup.Item>
             
                                     <ListGroup.Item>
-                                        <h6>Price: ${product.price}</h6>
-                                    </ListGroup.Item>
-            
-                                    <ListGroup.Item>
-                                    Desc: {product.description}
-                                    </ListGroup.Item>
-                                </ListGroup>
-                            </Col>
-            
-                            <Col md={3}>
-                                <Card>
-                                <ListGroup>
-                                    <ListGroup.Item>
+
                                         <Row>
-                                            <Col>Price:</Col>
-                                            <Col>
+                                        <Col md={3}>
+                                                Price:
+                                            </Col>
+                                            <Col md={3}>
                                                 <strong>${product.price}</strong>
                                             </Col>
-                                        </Row>
-                                    </ListGroup.Item>
-            
-                                    <ListGroup.Item>
-                                        <Row>
-                                            <Col>Status:</Col>
-                                            <Col>
+                                            <Col md={3}>Status:</Col>
+                                            <Col md={3}>
                                                 <strong>{product.countInStock > 0 ? 'In Stock' : 'Out of Stock'}</strong>
                                             </Col>
                                         </Row>
+                                        
+                                        
                                     </ListGroup.Item>
-
+            
+                                    <ListGroup.Item>
+                                        <p className="mb-0">Desc: {product.description}</p>
+                                    </ListGroup.Item>
+                                   
+                                    
                                     {product.countInStock > 0 && (
                                         <ListGroup.Item>
                                             <Row>
@@ -103,13 +95,15 @@ function ProductDetails({ match, history }) {
                                             </Row>
                                         </ListGroup.Item>
                                     )}
-            
+
                                     <ListGroup.Item>
-                                        <Button onClick={addToCartHandler} className='btn-block' disabled={product.countInStock == 0} type='button'>Add to Cart</Button>
+                                        <Button variant="outline-primary" onClick={addToCartHandler} className='btn-block' disabled={product.countInStock == 0} type='button'>Add to Cart</Button>
                                     </ListGroup.Item>
+                                    
+                                    
                                 </ListGroup>
-                                </Card>
                             </Col>
+            
                         </Row>
                         
                     )

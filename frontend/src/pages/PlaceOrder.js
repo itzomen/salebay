@@ -56,7 +56,7 @@ function PlaceOrder({ history }) {
                 <Col md={8}>
                     <ListGroup variant='flush'>
                         <ListGroup.Item>
-                            <h2>Shipping</h2>
+                            <h4>Shipping</h4>
 
                             <p>
                                 <strong>Shipping Address: </strong>
@@ -69,7 +69,7 @@ function PlaceOrder({ history }) {
                         </ListGroup.Item>
 
                         <ListGroup.Item>
-                            <h2>Payment Method</h2>
+                            <h5>Payment Method</h5>
                             <p>
                                 <strong>Method: </strong>
                                 {cart.paymentMethod}
@@ -77,7 +77,7 @@ function PlaceOrder({ history }) {
                         </ListGroup.Item>
 
                         <ListGroup.Item>
-                            <h2>Order Items</h2>
+                            <h4>Order Items</h4>
                             {cart.cartItems.length === 0 ? <Message variant='info'>
                                 Your cart is empty
                             </Message> : (
@@ -111,7 +111,7 @@ function PlaceOrder({ history }) {
                     <Card>
                         <ListGroup variant='flush'>
                             <ListGroup.Item>
-                                <h2>Order Summary</h2>
+                                <h3>Order Summary</h3>
                             </ListGroup.Item>
 
                             <ListGroup.Item>
