@@ -14,6 +14,7 @@ import Shipping from './pages/Shipping';
 import Payment from './pages/Payment';
 import PlaceOrder from './pages/PlaceOrder'
 import OrderDetails from './pages/OrderDetails'
+import UserList from './pages/UserList'
 
 
 function App() {
@@ -33,6 +34,8 @@ function App() {
           <Route path='/payment'component={Payment}  />
           <Route path='/product/:id'component={ProductDetails}  />
           <Route path='/cart/:id?'component={Cart}  />
+
+          <Route path='/admin/userlist' component={UserList} />
         </Container>
       </main>
       <Footer />
