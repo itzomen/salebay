@@ -99,7 +99,7 @@ function OrderDetails({ match, history }) {
                                     </p>
 
                                     {order.isDelivered ? (
-                                        <Message variant='success'>Delivered on {order.deliveredAt}</Message>
+                                        <Message variant='success'>Delivered on the {order.deliveredAt.substring(0, 10)} at {order.deliveredAt.substring(12, 19)}</Message>
                                     ) : (
                                             <Message variant='warning'>Not Delivered</Message>
                                         )}
@@ -115,7 +115,7 @@ function OrderDetails({ match, history }) {
                                     </p>
 
                                     {order.isPaid ? (
-                                        <Message variant='success'>Paid on {order.paidAt}</Message>
+                                        <Message variant='success'>Paid on the {order.paidAt.substring(0, 10)} at {order.paidAt.substring(12, 19)}</Message>
                                     ) : (
                                             <Message variant='warning'>Not Paid</Message>
                                         )}
