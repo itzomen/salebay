@@ -15,6 +15,7 @@ import Payment from './pages/Payment';
 import PlaceOrder from './pages/PlaceOrder'
 import OrderDetails from './pages/OrderDetails'
 import UserList from './pages/UserList'
+import UserEdit from './pages/UserEdit'
 
 
 function App() {
@@ -36,6 +37,7 @@ function App() {
           <Route path='/cart/:id?'component={Cart}  />
 
           <Route path='/admin/userlist' component={UserList} />
+          <Route path='/admin/user/:id/edit' component={UserEdit} />
         </Container>
       </main>
       <Footer />
