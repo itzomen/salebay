@@ -8,7 +8,7 @@ import { listUsers, deleteUser } from '../actions/userActions'
 
 
 
-function UserList(history) {
+function UserList({ history }) {
 
     const dispatch = useDispatch()
 

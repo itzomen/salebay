@@ -41,7 +41,7 @@ function Cart({ match, location, history}) {
             history.push('/login')
         }
         else{
-            history.push('/shipping')
+            history.push('/login?redirect=shipping')
         }
     }
 

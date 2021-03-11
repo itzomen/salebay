@@ -16,6 +16,7 @@ import PlaceOrder from './pages/PlaceOrder'
 import OrderDetails from './pages/OrderDetails'
 import UserList from './pages/UserList'
 import UserEdit from './pages/UserEdit'
+import ProductList from './pages/ProductList'
 
 
 function App() {
@@ -38,6 +39,8 @@ function App() {
 
           <Route path='/admin/userlist' component={UserList} />
           <Route path='/admin/user/:id/edit' component={UserEdit} />
+
+          <Route path='/admin/productlist' component={ProductList} />
         </Container>
       </main>
       <Footer />
