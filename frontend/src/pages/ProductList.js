@@ -7,6 +7,8 @@ import Message from '../components/Message'
 import { listProducts, deleteProduct, createProduct } from '../actions/productActions'
 import { PRODUCT_CREATE_RESET } from '../constants/productConstants'
 
+
+// distructure history props
 function ProductList({ history, match }) {
 
     const dispatch = useDispatch()

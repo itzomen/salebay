@@ -9,16 +9,18 @@ import Message from '../components/Message'
 import { listProducts } from "../actions/productActions";
 
 
-function Home() {
+function Home({ history }) {
     const dispatch = useDispatch()
     //selecting var form productReducer which has error, loading, products
     const productList = useSelector(state => state.productList)
     const {error, loading, products} = productList
 
-    useEffect(() => {
-        dispatch(listProducts())
+    let keyword = history.location.search
 
-    }, [])
+    useEffect(() => {
+        dispatch(listProducts(keyword))
+
+    }, [dispatch, keyword])
 
 
     return (
