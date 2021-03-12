@@ -4,6 +4,7 @@ import { Table, Button, Row, Col } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
+import Paginate from '../components/Paginate'
 import { listProducts, deleteProduct, createProduct } from '../actions/productActions'
 import { PRODUCT_CREATE_RESET } from '../constants/productConstants'
 
@@ -26,7 +27,8 @@ function ProductList({ history, match }) {
     const { userInfo } = userLogin
 
 
-    useEffect((id) => {
+    let keyword = history.location.search
+    useEffect(() => {
         dispatch({ type: PRODUCT_CREATE_RESET })
 
         if (!userInfo.isAdmin) {
@@ -36,10 +38,10 @@ function ProductList({ history, match }) {
         if (successCreate) {
             history.push(`/admin/product/${createdProduct._id}/edit`)
         } else {
-            dispatch(listProducts(id))
+            dispatch(listProducts(keyword))
         }
 
-    }, [dispatch, history, userInfo, successDelete, successCreate, createdProduct])
+    }, [dispatch, history, userInfo, successDelete, successCreate, createdProduct, keyword])
 
 
     const deleteHandler = (id) => {
@@ -116,6 +118,7 @@ function ProductList({ history, match }) {
                                     ))}
                                 </tbody>
                             </Table>
+                            <Paginate pages={pages} page={page} isAdmin={true} />
                         </div>
                     )}
         </div>

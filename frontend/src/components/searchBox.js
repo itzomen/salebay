@@ -14,6 +14,7 @@ function SearchBox() {
         e.preventDefault()
 
         if (keyword) {
+            // start at page 1
             history.push(`/?keyword=${keyword}&page=1`)
         } else {
             history.push(history.push(history.location.pathname))
