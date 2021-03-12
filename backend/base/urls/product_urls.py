@@ -14,6 +14,7 @@ urlpatterns = [
     path('upload/', views.uploadImage, name="image-upload"),
 
     # dynamic urls
+    path('top/', views.getTopProducts, name='top-products'),
     path('<str:pk>/', views.getProduct, name="product"),
     path('<str:pk>/reviews/', views.createProductReview, name="create-review"),
 

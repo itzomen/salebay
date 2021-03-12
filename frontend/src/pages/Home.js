@@ -8,6 +8,7 @@ import Loader from '../components/Loader'
 import Message from '../components/Message'
 import Paginate from '../components/Paginate'
 import { listProducts } from "../actions/productActions";
+import TopCarousel from '../components/TopCarousel'
 
 
 function Home({ history }) {
@@ -26,6 +27,7 @@ function Home({ history }) {
 
     return (
         <div>
+            {!keyword && <TopCarousel />}
             <h2>Trending products</h2>
 
             {loading ? <Loader />
