@@ -20,6 +20,7 @@ function Home({ history }) {
     let keyword = history.location.search
 
     useEffect(() => {
+        console.log('Products num:', products.length)
         dispatch(listProducts(keyword))
 
     }, [dispatch, keyword])
@@ -35,6 +36,15 @@ function Home({ history }) {
                 : error ? <Message variant='danger'>{error}</Message>
                 : 
                 <div>
+
+                    {/* {cartItems.length == 0 ? (
+                                        <Message variant='info'>
+                                            Your cart is empty <Link to='/'>Go Back</Link>
+                                        </Message>
+                                    ) : (
+                                        suc
+                                    )} */}
+
                     <Row>
                         {products.map(product => (
                             // add key as each product should have unique id
