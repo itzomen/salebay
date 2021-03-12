@@ -49,7 +49,7 @@ function UserEdit({ match, history }) {
 
     return (
         <div>
-            <Link to='/admin/userlist'>
+            <Link className='btn btn-dark my-3' to='/admin/userlist'>
                 Go Back
             </Link>
 
