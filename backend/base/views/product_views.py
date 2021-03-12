@@ -12,7 +12,17 @@ from rest_framework import status
 
 @api_view(['GET'])
 def getProducts(request):
-    products = Product.objects.all()
+
+    query = request.query_params.get('keyword')
+    #print('The Query is:', query)
+    if query == None:
+        query = ''
+
+    
+    #products = Product.objects.all()
+    products = Product.objects.filter(name__icontains=query)
+
+
     # many for serializing many objects
     serializer = ProductSerializer(products, many=True)
     return Response(serializer.data)
