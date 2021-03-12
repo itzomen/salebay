@@ -1,5 +1,4 @@
-# SaleBay
-> This is an E-commerce platform built with Django, Redux, and React
+<img src="salebay-desc.png" width="300px">
 
 ## Get Started
 ```
