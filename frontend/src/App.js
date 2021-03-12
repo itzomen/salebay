@@ -18,6 +18,7 @@ import UserList from './pages/UserList'
 import UserEdit from './pages/UserEdit'
 import ProductList from './pages/ProductList'
 import ProductEdit from './pages/ProductEdit'
+import OrderList from './pages/OrderList'
 
 
 function App() {
@@ -43,6 +44,8 @@ function App() {
 
           <Route path='/admin/productlist' component={ProductList} />
           <Route path='/admin/product/:id/edit' component={ProductEdit} />
+
+          <Route path='/admin/orderlist' component={OrderList} />
         </Container>
       </main>
       <Footer />

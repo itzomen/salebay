@@ -157,7 +157,8 @@ function Profile({ history }) {
                                             <td>{order._id}</td>
                                             <td>{order.createdAt.substring(0, 10)}</td>
                                             <td>${order.totalPrice}</td>
-                                            <td>{order.isPaid ? order.paidAt.substring(0, 10) : (
+                                            <td> {order.isPaid ? 
+                                                <i className='fas fa-check' style={{ color: 'green' }}>    { order.paidAt.substring(0, 10) }</i>  : (
                                                 <i className='fas fa-times' style={{ color: 'red' }}> Not Paid</i>
                                             )}</td>
                                             <td>
