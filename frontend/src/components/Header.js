@@ -20,7 +20,7 @@ function Header() {
 
     return (
         <header>
-        <Navbar bg="light" variant="dark" expand="lg" collapseOnSelect>
+        <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect>
             <Container>
                 <LinkContainer to="/">
                     <Navbar.Brand><img src={Logo} style={{width:100, marginTop: -7}} /></Navbar.Brand>

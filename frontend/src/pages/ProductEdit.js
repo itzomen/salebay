@@ -153,8 +153,7 @@ function ProductEdit({ match, history }) {
 
                                 <Form.File
                                     id='image-file'
-                                    label='Choose File'
-                                    custom
+                                    label='Choose Image File'
                                     onChange={uploadFileHandler}
                                 >
 
@@ -204,7 +203,8 @@ function ProductEdit({ match, history }) {
                                 <Form.Label>Description</Form.Label>
                                 <Form.Control
 
-                                    type='text'
+                                    as="textarea" 
+                                    rows={6}
                                     placeholder='Enter description'
                                     value={description}
                                     onChange={(e) => setDescription(e.target.value)}
