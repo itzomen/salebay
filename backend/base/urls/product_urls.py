@@ -15,6 +15,7 @@ urlpatterns = [
 
     # dynamic urls
     path('<str:pk>/', views.getProduct, name="product"),
+    path('<str:pk>/reviews/', views.createProductReview, name="create-review"),
 
     path('update/<str:pk>/', views.updateProduct, name="product-update"),
     path('delete/<str:pk>/', views.deleteProduct, name="product-delete"),
