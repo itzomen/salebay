@@ -1,4 +1,4 @@
-<img src="salebay-desc.png" width="300px">
+<img src="salebay.png" width="300px">
 
 ## Get Started
 ```
