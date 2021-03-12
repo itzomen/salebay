@@ -122,12 +122,42 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+
+# Database Choice, 
+# Set DATABASE = 1 for SQLite 
+# Set DATABASE = 2 for Postgres 
+# pip install psycopg2 to use postgres in Django
+
+DATABASE = 1;
+
+if DEBUG and (DATABASE == 1):
+    # Use SQLite Database
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
     }
-}
+elif DEBUG and (DATABASE == 2):
+    # Use Local Postgres Dtabase
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            # set database name
+            'NAME': 'salebay',
+            # set your user details
+            'USER': 'admin',
+            'PASSWORD': 'password',
+            'HOST': 'localhost',
+            'POST': '5432'
+        }
+    }
+else:
+    # Use Production Dtabase Postgres
+    pass
+
+
+
 
 
 # Password validation

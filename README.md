@@ -14,8 +14,8 @@
 # Move to frontend directory and Install dependencies
 cd frontend && npm install
 
-# Move to frontend directory and Build React project
-cd frontend && npm run build
+# Build React project
+npm run build
 
 # Serve API on localhost:8000
 python manage.py runserver

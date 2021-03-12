@@ -42,7 +42,7 @@ function Home({ history }) {
 
                     {products.length == 0 ? (
                             <Message variant='info'>
-                                Now Product was found with that Keyword, Try Searching Again! 
+                                No Product was found, Try Searching Again! 
                                 <Link to='/'> Back to Home</Link>
                             </Message>
                         ) : (
