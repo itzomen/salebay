@@ -28,6 +28,7 @@ function Home({ history }) {
     return (
         <div>
             {!keyword && <TopCarousel />}
+
             <h2>Trending products</h2>
 
             {loading ? <Loader />
