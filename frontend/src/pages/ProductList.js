@@ -4,7 +4,7 @@ import { Table, Button, Row, Col } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
-import { listProducts, deleteProduct } from '../actions/productActions'
+import { listProducts, deleteProduct, createProduct } from '../actions/productActions'
 import { PRODUCT_CREATE_RESET } from '../constants/productConstants'
 
 function ProductList({ history, match }) {
@@ -14,6 +14,9 @@ function ProductList({ history, match }) {
     const productList = useSelector(state => state.productList)
     const { loading, error, products, pages, page } = productList
 
+    const productCreate = useSelector(state => state.productCreate)
+    const { loading: loadingCreate, error: errorCreate, success: successCreate, product: createdProduct } = productCreate
+
     const productDelete = useSelector(state => state.productDelete)
     const { loading: loadingDelete, error: errorDelete, success: successDelete } = productDelete
 
@@ -21,16 +24,20 @@ function ProductList({ history, match }) {
     const { userInfo } = userLogin
 
 
-    useEffect(() => {
+    useEffect((id) => {
+        dispatch({ type: PRODUCT_CREATE_RESET })
 
-        if (userInfo && userInfo.isAdmin) {
-            
-            dispatch(listProducts())
-        } else {
+        if (!userInfo.isAdmin) {
             history.push('/login')
         }
 
-    }, [dispatch, history, userInfo, successDelete])
+        if (successCreate) {
+            history.push(`/admin/product/${createdProduct._id}/edit`)
+        } else {
+            dispatch(listProducts(id))
+        }
+
+    }, [dispatch, history, userInfo, successDelete, successCreate, createdProduct])
 
 
     const deleteHandler = (id) => {
@@ -41,8 +48,7 @@ function ProductList({ history, match }) {
     }
 
     const createProductHandler = () => {
-        //dispatch(createProduct())
-        console.log('Create')
+        dispatch(createProduct())
     }
 
     return (
@@ -63,8 +69,8 @@ function ProductList({ history, match }) {
             {errorDelete && <Message variant='danger'>{errorDelete}</Message>}
 
 
-            {/* {loadingCreate && <Loader />}
-            {errorCreate && <Message variant='danger'>{errorCreate}</Message>} */}
+            {loadingCreate && <Loader />}
+            {errorCreate && <Message variant='danger'>{errorCreate}</Message>}
 
             {loading
                 ? (<Loader />)
