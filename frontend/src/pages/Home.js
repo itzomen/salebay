@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from 'react-router-dom'
 
 import { Row, Col } from 'react-bootstrap'
 import Product from '../components/Product'
@@ -21,6 +22,7 @@ function Home({ history }) {
 
     useEffect(() => {
         console.log('Products num:', products.length)
+        //console.log('Products', products)
         dispatch(listProducts(keyword))
 
     }, [dispatch, keyword])
@@ -35,28 +37,29 @@ function Home({ history }) {
             {loading ? <Loader />
                 : error ? <Message variant='danger'>{error}</Message>
                 : 
+                
                 <div>
 
-                    {/* {cartItems.length == 0 ? (
-                                        <Message variant='info'>
-                                            Your cart is empty <Link to='/'>Go Back</Link>
-                                        </Message>
-                                    ) : (
-                                        suc
-                                    )} */}
-
-                    <Row>
-                        {products.map(product => (
-                            // add key as each product should have unique id
-                            <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
-                                <Product product={product} />
-                            </Col>
-                        ))}
-                    </Row>
-                    <Paginate page={page} pages={pages} keyword={keyword} />
-                </div>
-        }
-
+                    {products.length == 0 ? (
+                            <Message variant='info'>
+                                Now Product was found with that Keyword, Try Searching Again! 
+                                <Link to='/'> Back to Home</Link>
+                            </Message>
+                        ) : (
+                        <div>
+                            <Row>
+                                {products.map(product => (
+                                    // add key as each product should have unique id
+                                    <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
+                                        <Product product={product} />
+                                    </Col>
+                                ))}
+                            </Row>
+                            <Paginate page={page} pages={pages} keyword={keyword} />
+                        </div>
+                    )}
+                </div>      
+            }
             
         </div>
     )
