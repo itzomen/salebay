@@ -23,12 +23,16 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'wys6dfszbtuo-7&ox^@fw-i5v7nngo!xjog+^s+fy+!r*bcxxk'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
+
+# When DEBUG is False, static files are served by whitenoise as its in Middleware
+# When True, its served by django developement server
+
 
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
 
-# Application definition
+# Application definition'django.core.files.storage.FileSystemStorage'
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -88,6 +92,10 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
 
     'django.middleware.security.SecurityMiddleware',
+
+    # whitenoise:  above all other middleware apart from Django’s SecurityMiddleware
+    #'whitenoise.middleware.WhiteNoiseMiddleware',
+
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -214,6 +222,10 @@ MEDIA_ROOT = BASE_DIR / 'static/images'
 STATIC_ROOT = BASE_DIR / 'staticFiles'
 
 
-
-
 CORS_ALLOW_ALL_ORIGINS = True
+
+# Set Static Cloud storage here or Cofigure Nginx server to load statics
+
+
+# Read the docs at http://whitenoise.evans.io/
+#STATICFILES_STORAGE = ''
