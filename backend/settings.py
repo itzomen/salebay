@@ -23,9 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'wys6dfszbtuo-7&ox^@fw-i5v7nngo!xjog+^s+fy+!r*bcxxk'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
 
 # Application definition
@@ -153,8 +153,14 @@ elif DEBUG and (DATABASE == 2):
         }
     }
 else:
-    # Use Production Dtabase Postgres
-    pass
+    # Use Production Dtabase e.g Postgres
+    # Using SQLite Database for demonstration
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
 
 
 
@@ -205,6 +211,7 @@ STATICFILES_DIRS = [
 ]
 
 MEDIA_ROOT = BASE_DIR / 'static/images'
+STATIC_ROOT = BASE_DIR / 'staticFiles'
 
 
 
