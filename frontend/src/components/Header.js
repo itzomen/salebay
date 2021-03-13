@@ -21,25 +21,26 @@ function Header() {
     return (
         <header>
         <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect>
-            <Container>
+            <Container >
                 <LinkContainer to="/">
                     <Navbar.Brand><img src={Logo} style={{width:100, marginTop: -7}} /></Navbar.Brand>
                 </LinkContainer>
 
-                <SearchBox />
+                
 
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
+                <SearchBox />
                     <Nav className="ml-auto">
 
                         <LinkContainer to="/cart">
-                            <Nav.Link><i className="fas fa-shopping-bag"></i> CART</Nav.Link>
+                            <Nav.Link><i className="fas fa-shopping-bag" style={{ color: 'green' }}></i> CART </Nav.Link>
                         </LinkContainer>
 
                         {userInfo ? (
                                 <NavDropdown title={userInfo.name} id='username'>
                                     <LinkContainer to='/profile'>
-                                        <NavDropdown.Item>Profile</NavDropdown.Item>
+                                        <NavDropdown.Item> Profile </NavDropdown.Item>
                                     </LinkContainer>
 
                                     <NavDropdown.Item onClick={logoutHandler}>Logout</NavDropdown.Item>
