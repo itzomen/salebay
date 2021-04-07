@@ -1,5 +1,6 @@
 <img src="salebay.png" width="300px">
 
+[![wakatime](https://wakatime.com/badge/github/itzomen/salebay.svg)](https://wakatime.com/badge/github/itzomen/salebay)
 ## [Preview SaleBay](https://salebay.pythonanywhere.com)
 
 ## Get Started
